@@ -5,29 +5,26 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectHeader from './selectors';
-import reducer from './reducer';
-import saga from './saga';
 
 import Logo from 'images/logo.png';
-import Img from '../../components/Img';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Img from '../../components/Img';
+import saga from './saga';
+import reducer from './reducer';
+import makeSelectHeader from './selectors';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
@@ -93,7 +90,7 @@ export function Header() {
       <AppBar position="static">
         <Toolbar>
           <div className={classes.title}>
-            <Img src={Logo} height="55px" alt="Logo" href="/"/>
+            <Img src={Logo} height="55px" alt="Logo" href="/" />
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -115,7 +112,7 @@ export function Header() {
 }
 
 Header.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
