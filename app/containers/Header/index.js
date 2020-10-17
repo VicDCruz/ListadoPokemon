@@ -93,7 +93,7 @@ export function Header() {
       <AppBar position="static">
         <Toolbar>
           <div className={classes.title}>
-            <Img src={Logo} height="55px" alt="Logo" />
+            <Img src={Logo} height="55px" alt="Logo" href="/"/>
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
