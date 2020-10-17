@@ -40,8 +40,8 @@ export function HomePage() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary">
-            Primary
+          <Button variant="contained" color="primary" href="pokemons">
+            Ver Pokémons
           </Button>
         </Grid>
       </Grid>
