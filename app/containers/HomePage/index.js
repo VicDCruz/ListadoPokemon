@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -16,7 +15,8 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+import Typography from '@material-ui/core/Typography';
+import { Grid, Button } from '@material-ui/core';
 
 export function HomePage() {
   useInjectReducer({ key: 'homePage', reducer });
@@ -24,7 +24,27 @@ export function HomePage() {
 
   return (
     <div>
-      <FormattedMessage {...messages.header} />
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item xs={12}>
+          <Typography variant="h4" component="h2" gutterBottom align="center" color="textPrimary">
+           Bienvenido Entrador Pokémon
+          </Typography>
+          <Typography variant="h6" align="center" color="textSecondary">
+            ¿estás preparado para buscar la información necesaria?
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary">
+            Primary
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 }
