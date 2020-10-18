@@ -32,108 +32,118 @@ export class PokemonPage extends React.Component {
 
     return (
       <div>
-        <Typography variant="h3" gutterBottom>
-          {pokemon.toUpperCase()}
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
-            <Img
-              src={this.props.pokemonPage.img}
-              height="250px"
-              alt={pokemon}
-            />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Typography variant="h4" gutterBottom>
-              Información
+        {!this.props.pokemonPage.loading && this.props.pokemonPage.error && (
+          <Typography variant="h2" gutterBottom>
+            No encontramos a {pokemon.toUpperCase()}. Al parecer, nadie lo ha
+            capturado aún :(
+          </Typography>
+        )}
+        {!this.props.pokemonPage.loading && !this.props.pokemonPage.error && (
+          <div>
+            <Typography variant="h3" gutterBottom>
+              {pokemon.toUpperCase()}
             </Typography>
-            <Typography variant="h5" gutterBottom>
-              ID: {this.props.pokemonPage.id}
-            </Typography>
-            <Typography variant="h5" gutterBottom>
-              Peso: {this.props.pokemonPage.weight} kg
-            </Typography>
-            <Drawer title="Habilidades">
-              <Grid
-                container
-                spacing={2}
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                {this.props.pokemonPage.abilities.map(ability => (
-                  <Grid item xs key={ability.ability.name}>
-                    <Paper elevation={4}>
-                      <Typography variant="subtitle2">
-                        Nombre: {ability.ability.name}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        Slot: {ability.slot}
-                      </Typography>
-                    </Paper>
-                  </Grid>
-                ))}
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <Img
+                  src={this.props.pokemonPage.img}
+                  height="250px"
+                  alt={pokemon}
+                />
               </Grid>
-            </Drawer>
-            <Drawer title="Tipos">
-              <Grid
-                container
-                spacing={2}
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                {this.props.pokemonPage.types.map(type => (
-                  <Grid item xs key={type.type.name}>
-                    <Paper elevation={4}>
-                      <Typography variant="subtitle2">
-                        Nombre: {type.type.name}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        Slot: {type.slot}
-                      </Typography>
-                    </Paper>
+              <Grid item xs={12} md={8}>
+                <Typography variant="h4" gutterBottom>
+                  Información
+                </Typography>
+                <Typography variant="h5" gutterBottom>
+                  ID: {this.props.pokemonPage.id}
+                </Typography>
+                <Typography variant="h5" gutterBottom>
+                  Peso: {this.props.pokemonPage.weight} kg
+                </Typography>
+                <Drawer title="Habilidades">
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    {this.props.pokemonPage.abilities.map(ability => (
+                      <Grid item xs key={ability.ability.name}>
+                        <Paper elevation={4}>
+                          <Typography variant="subtitle2">
+                            Nombre: {ability.ability.name}
+                          </Typography>
+                          <Typography variant="subtitle2">
+                            Slot: {ability.slot}
+                          </Typography>
+                        </Paper>
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
-              </Grid>
-            </Drawer>
-            <Drawer title="Movimientos">
-              <Grid
-                container
-                spacing={2}
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                {this.props.pokemonPage.moves.map(move => (
-                  <Grid item xs={12} key={move.move.name}>
-                    <Paper elevation={4}>
-                      <Typography variant="subtitle2">
-                        Nombre: {move.move.name}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        Aprenido en los niveles:
-                      </Typography>
-                      <ul>
-                        {move.version_group_details.map(version => (
-                          <li
-                            key={`${version.version_group.name}: 
+                </Drawer>
+                <Drawer title="Tipos">
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    {this.props.pokemonPage.types.map(type => (
+                      <Grid item xs key={type.type.name}>
+                        <Paper elevation={4}>
+                          <Typography variant="subtitle2">
+                            Nombre: {type.type.name}
+                          </Typography>
+                          <Typography variant="subtitle2">
+                            Slot: {type.slot}
+                          </Typography>
+                        </Paper>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Drawer>
+                <Drawer title="Movimientos">
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    {this.props.pokemonPage.moves.map(move => (
+                      <Grid item xs={12} key={move.move.name}>
+                        <Paper elevation={4}>
+                          <Typography variant="subtitle2">
+                            Nombre: {move.move.name}
+                          </Typography>
+                          <Typography variant="subtitle2">
+                            Aprenido en los niveles:
+                          </Typography>
+                          <ul>
+                            {move.version_group_details.map(version => (
+                              <li
+                                key={`${version.version_group.name}: 
                           ${version.move_learn_method.name} - 
                           ${version.level_learned_at}`}
-                          >
-                            {`${version.version_group.name}: 
+                              >
+                                {`${version.version_group.name}: 
                               ${version.move_learn_method.name} - 
                               ${version.level_learned_at}`}
-                          </li>
-                        ))}
-                      </ul>
-                    </Paper>
+                              </li>
+                            ))}
+                          </ul>
+                        </Paper>
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
+                </Drawer>
               </Grid>
-            </Drawer>
-          </Grid>
-        </Grid>
+            </Grid>
+          </div>
+        )}
       </div>
     );
   }
