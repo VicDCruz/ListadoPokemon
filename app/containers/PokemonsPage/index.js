@@ -13,8 +13,9 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Table from 'components/Table';
+import Cards from 'components/Cards';
 import Img from 'components/Img/Loadable';
-import { Button } from '@material-ui/core';
+import { Button, FormControlLabel, Switch } from '@material-ui/core';
 import makeSelectPokemonsPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -30,7 +31,7 @@ const headers = [
     id: 'img',
     numeric: false,
     label: 'Imagen',
-    format: element => <Img src={element} width="50px" />,
+    format: element => <Img src={element} alt="Pokémon" width="50px" />,
   },
   {
     id: 'name',
@@ -60,14 +61,36 @@ export class PokemonsPage extends React.Component {
     const handleChangePage = (limit, offset) =>
       this.props.getPokemons(limit, offset);
 
+    const handleShow = event =>
+      this.setState({ showTable: event.target.checked });
+
+    const handleClickCard = url => {
+      window.location.href = url;
+    };
+
     return (
       <div>
+        <FormControlLabel
+          control={
+            <Switch checked={this.state.showTable} onChange={handleShow} />
+          }
+          label="Mostrar tabla"
+        />
         {this.state.showTable && (
           <Table
             headers={headers}
             rows={rows}
             count={count}
             onChangePage={handleChangePage}
+          />
+        )}
+        {!this.state.showTable && (
+          <Cards
+            cards={rows}
+            limit={10}
+            count={count}
+            onChangePage={handleChangePage}
+            onClick={handleClickCard}
           />
         )}
       </div>
