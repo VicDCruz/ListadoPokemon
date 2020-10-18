@@ -31,14 +31,14 @@ const useStyles = makeStyles({
 function Cards(props) {
   const classes = useStyles();
 
+  const handleClick = pokemon => () => props.onClick(pokemon);
+
   return (
     <Grid container spacing={2}>
       {props.cards.map(card => (
         <Grid item xs={5} key={card.name}>
           <Card className={classes.root}>
-            <CardActionArea
-              {...{ onClick: props.onClick ? props.onClick : null }}
-            >
+            <CardActionArea onClick={handleClick(card.name)}>
               <CardMedia
                 className={classes.media}
                 image={card.img}

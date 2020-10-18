@@ -22,11 +22,13 @@ import Drawer from './Drawer';
 
 export class PokemonPage extends React.Component {
   componentWillMount() {
-    this.props.getPokemon(this.props.match.params.name || this.props.name);
+    this.props.getPokemon(
+      this.props.match ? this.props.match.params.name : this.props.name,
+    );
   }
 
   render() {
-    const pokemon = this.props.match.params.name;
+    const pokemon = this.props.match ? this.props.match.params.name : '';
 
     return (
       <div>

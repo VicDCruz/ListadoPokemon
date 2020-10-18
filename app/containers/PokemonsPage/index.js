@@ -14,8 +14,9 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Table from 'components/Table';
 import Cards from 'components/Cards';
+import PokemonPage from 'containers/PokemonPage';
 import Img from 'components/Img/Loadable';
-import { Button, FormControlLabel, Switch } from '@material-ui/core';
+import { Button, Dialog, FormControlLabel, Switch } from '@material-ui/core';
 import makeSelectPokemonsPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -28,12 +29,6 @@ const headers = [
     label: 'ID',
   },
   {
-    id: 'img',
-    numeric: false,
-    label: 'Imagen',
-    format: element => <Img src={element} alt="Pokémon" width="50px" />,
-  },
-  {
     id: 'name',
     numeric: false,
     label: 'Nombre',
@@ -43,12 +38,18 @@ const headers = [
       </Button>
     ),
   },
+  {
+    id: 'img',
+    numeric: false,
+    label: 'Imagen',
+    format: element => <Img src={element} alt="Pokémon" width="50px" />,
+  },
 ];
 
 export class PokemonsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showTable: true };
+    this.state = { showTable: true, showDialog: false, pokemon: '' };
   }
 
   componentWillMount() {
@@ -64,8 +65,12 @@ export class PokemonsPage extends React.Component {
     const handleShow = event =>
       this.setState({ showTable: event.target.checked });
 
-    const handleClickCard = url => {
-      window.location.href = url;
+    const handleClickCard = pokemon => {
+      this.setState({ showDialog: true, pokemon });
+    };
+
+    const handleClose = () => {
+      this.setState({ showDialog: false });
     };
 
     return (
@@ -93,6 +98,14 @@ export class PokemonsPage extends React.Component {
             onClick={handleClickCard}
           />
         )}
+        <Dialog
+          fullWidth
+          maxWidth="xl"
+          onClose={handleClose}
+          open={this.state.showDialog}
+        >
+          <PokemonPage name={this.state.pokemon} />
+        </Dialog>
       </div>
     );
   }
