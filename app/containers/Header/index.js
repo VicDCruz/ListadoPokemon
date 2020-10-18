@@ -83,7 +83,22 @@ export function Header() {
   useInjectReducer({ key: 'header', reducer });
   useInjectSaga({ key: 'header', saga });
 
+  const [pokemon, setPokemon] = React.useState('');
+
   const classes = useStyles();
+
+  const handleChange = event => setPokemon(event.target.value);
+
+  const goTo = url => {
+    window.location.href = url;
+  };
+
+  const handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      goTo(`/pokemon/${pokemon.toLowerCase()}/`);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -94,7 +109,9 @@ export function Header() {
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon
+                onClick={() => goTo(`/pokemon/${pokemon.toLowerCase()}/`)}
+              />
             </div>
             <InputBase
               placeholder="Buscar..."
@@ -103,6 +120,8 @@ export function Header() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onKeyPress={handleKeyPress}
+              onChange={handleChange}
             />
           </div>
         </Toolbar>
