@@ -28,7 +28,7 @@ export class PokemonPage extends React.Component {
   }
 
   render() {
-    const pokemon = this.props.match ? this.props.match.params.name : '';
+    const pokemon = this.props.pokemonPage.name;
 
     return (
       <div>

@@ -10,6 +10,7 @@ export const initialState = {
   loading: false,
   error: false,
   id: 0,
+  name: '',
   img: '',
   weight: '',
   abilities: [],
@@ -29,6 +30,7 @@ const pokemonPageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = false;
         draft.id = action.id;
+        draft.name = action.name;
         draft.img = action.img;
         draft.weight = action.weight;
         draft.abilities = action.abilities;

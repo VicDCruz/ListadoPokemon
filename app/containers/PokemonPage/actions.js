@@ -15,6 +15,7 @@ export function getPokemon(name) {
 
 export function getPokemonSuccess(
   id,
+  name,
   img,
   weight,
   baseExperience,
@@ -31,6 +32,7 @@ export function getPokemonSuccess(
     img,
     weight,
     baseExperience,
+    name,
   };
 }
 

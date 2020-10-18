@@ -14,6 +14,7 @@ export function* getPokemon(action) {
     yield put(
       actions.getPokemonSuccess(
         response.id,
+        response.name,
         `https://pokeres.bastionbot.org/images/pokemon/${response.id}.png`,
         response.weight,
         response.base_experience,
