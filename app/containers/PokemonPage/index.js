@@ -13,7 +13,13 @@ import { withStyles } from '@material-ui/styles';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { Grid, Paper, Typography, IconButton, Tooltip } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Typography,
+  IconButton,
+  Tooltip,
+} from '@material-ui/core';
 import Img from 'components/Img';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
