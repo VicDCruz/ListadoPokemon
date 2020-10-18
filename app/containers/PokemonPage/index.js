@@ -61,7 +61,11 @@ export class PokemonPage extends React.Component {
                 <Typography variant="h5" gutterBottom>
                   Peso: {this.props.pokemonPage.weight} kg
                 </Typography>
-                <Drawer title="Habilidades">
+                <Drawer
+                  title={`Habilidades - ${
+                    this.props.pokemonPage.baseExperience
+                  } exp. base`}
+                >
                   <Grid
                     container
                     spacing={2}

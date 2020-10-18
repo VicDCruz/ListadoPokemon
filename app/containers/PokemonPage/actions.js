@@ -13,7 +13,15 @@ export function getPokemon(name) {
   };
 }
 
-export function getPokemonSuccess(id, img, weight, abilities, types, moves) {
+export function getPokemonSuccess(
+  id,
+  img,
+  weight,
+  baseExperience,
+  abilities,
+  types,
+  moves,
+) {
   return {
     type: constants.GET_POKEMON_SUCCESS,
     abilities,
@@ -22,6 +30,7 @@ export function getPokemonSuccess(id, img, weight, abilities, types, moves) {
     id,
     img,
     weight,
+    baseExperience,
   };
 }
 

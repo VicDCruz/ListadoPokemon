@@ -32,6 +32,7 @@ const pokemonPageReducer = (state = initialState, action) =>
         draft.img = action.img;
         draft.weight = action.weight;
         draft.abilities = action.abilities;
+        draft.baseExperience = action.baseExperience;
         draft.types = action.types;
         draft.moves = action.moves;
         break;

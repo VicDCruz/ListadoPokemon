@@ -16,6 +16,7 @@ export function* getPokemon(action) {
         response.id,
         `https://pokeres.bastionbot.org/images/pokemon/${response.id}.png`,
         response.weight,
+        response.base_experience,
         response.abilities,
         response.types,
         response.moves,
