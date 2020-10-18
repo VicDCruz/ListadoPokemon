@@ -9,16 +9,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { withStyles } from '@material-ui/styles';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography, IconButton, Tooltip } from '@material-ui/core';
 import Img from 'components/Img';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import makeSelectPokemonPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getPokemon } from './actions';
 import Drawer from './Drawer';
+
+const styles = () => ({
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export class PokemonPage extends React.Component {
   componentWillMount() {
@@ -29,6 +40,13 @@ export class PokemonPage extends React.Component {
 
   render() {
     const pokemon = this.props.pokemonPage.name;
+    const { classes } = this.props;
+
+    const goTo = url => {
+      window.location.href = url;
+    };
+
+    const handleClick = id => () => goTo(`/pokemon/${id}/`);
 
     return (
       <div>
@@ -145,6 +163,40 @@ export class PokemonPage extends React.Component {
                   </Grid>
                 </Drawer>
               </Grid>
+              <Grid xs={12}>
+                <Grid
+                  container
+                  xs={12}
+                  direction="row"
+                  justify="space-evenly"
+                  alignItems="center"
+                >
+                  <Grid item xs={1}>
+                    <Tooltip title="Anterior">
+                      <IconButton
+                        aria-label="Anterior"
+                        className={classes.button}
+                        onClick={handleClick(this.props.pokemonPage.id - 1)}
+                        disabled={this.props.pokemonPage.id === 1}
+                      >
+                        <NavigateBeforeIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Tooltip title="Siguiente">
+                      <IconButton
+                        aria-label="Siguiente"
+                        className={classes.button}
+                        onClick={handleClick(this.props.pokemonPage.id + 1)}
+                        disabled={this.props.pokemonPage.id === 893}
+                      >
+                        <NavigateNextIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </div>
         )}
@@ -158,6 +210,7 @@ PokemonPage.propTypes = {
   match: PropTypes.object,
   pokemonPage: PropTypes.object,
   name: PropTypes.string,
+  classes: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -182,4 +235,5 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
+  withStyles(styles),
 )(PokemonPage);
