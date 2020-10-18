@@ -41,7 +41,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/pokemons" component={PokemonsPage} />
-          <Route path="/pokemons/:id" component={PokemonPage} />
+          <Route path="/pokemon/:name" component={PokemonPage} />
           <Route path="" component={NotFoundPage} />
         </Switch>
         <GlobalStyle />
